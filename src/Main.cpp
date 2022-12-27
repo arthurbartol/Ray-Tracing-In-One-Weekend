@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "MathCommon.h"
-#include "Color.h"
 #include "HittableList.h"
 #include "Sphere.h"
 #include "Camera.h"
@@ -14,6 +13,24 @@ Vec3 rayColor(const Ray& ray, const Hittable& world)
     Vec3 normalizedDir = normalized(ray.direction);
     double t = 0.5 * (normalizedDir.y + 1.0);
     return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);
+}
+
+void writePPM(std::ostream& out, Vec3 pixelColor, int samplesPerPixel)
+{
+    double r = pixelColor.x;
+    double g = pixelColor.y;
+    double b = pixelColor.z;
+
+    // Divide the color by the number of samples
+    double scale = 1.0 / samplesPerPixel;
+    r *= scale;
+    g *= scale;
+    b *= scale;
+
+    // Write the translated [0,255] value of each color component.
+    out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '
+        << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << ' '
+        << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << '\n';
 }
 
 int main()
@@ -50,7 +67,7 @@ int main()
                 pixelColor += rayColor(ray, world);
             }
 
-            writeColor(std::cout, pixelColor, SAMPLES_PER_PIXEL);
+            writePPM(std::cout, pixelColor, SAMPLES_PER_PIXEL);
         }
     }
 
