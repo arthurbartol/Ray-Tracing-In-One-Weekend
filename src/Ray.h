@@ -5,9 +5,17 @@
 class Ray
 {
 public:
-    Ray() {}
+    Ray()
+    {
+        this->origin = Vec3(0.0);
+        this->direction = Vec3(0.0);
+    }
+
     Ray(const Vec3& origin, const Vec3& direction)
-        : origin(origin), direction(direction) {}
+    {
+        this->origin = origin;
+        this->direction = direction;
+    }
 
     //
     // Methods

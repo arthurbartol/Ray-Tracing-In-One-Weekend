@@ -20,6 +20,13 @@ inline double deg2rad(double degrees)
     return degrees * PI / 180.0;
 }
 
+inline double clamp(double x, double min, double max)
+{
+    if (x < min) return min;
+    if (x > max) return max;
+    return x;
+}
+
 inline double randomDouble()
 {
     // Returns a random real in [0,1]
@@ -31,14 +38,3 @@ inline double randomDouble(double min, double max)
     // Returns a random real in [min,max]
     return min + (max - min) * randomDouble();
 }
-
-inline double clamp(double x, double min, double max)
-{
-    if (x < min) return min;
-    if (x > max) return max;
-    return x;
-}
-
-// Common headers
-#include "Ray.h"
-#include "Vec3.h"

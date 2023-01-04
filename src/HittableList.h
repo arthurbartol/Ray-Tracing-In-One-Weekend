@@ -30,7 +30,7 @@ public:
         objects.push_back(object);
     }
 
-    virtual bool hit(const Ray& ray, double tMin, double tMax, HitRecord& hitRec) const override
+    bool hit(const Ray& ray, double tMin, double tMax, HitRecord& hitRec) const override
     {
         HitRecord tempRec;
         bool hitAnything = false;

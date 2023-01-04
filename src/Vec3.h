@@ -3,11 +3,31 @@
 #include <iostream>
 #include <cmath>
 
+#include "MathCommon.h"
+
 class Vec3
 {
 public:
-    Vec3() : x(0.0), y(0.0), z(0.0) {}
-    Vec3(double x, double y, double z) : x(x), y(y), z(z) {}
+    Vec3()
+    {
+        this->x = 0.0;
+        this->y = 0.0;
+        this->z = 0.0;
+    }
+
+    Vec3(double x, double y, double z)
+    {
+        this->x = x;
+        this->y = y;
+        this->z = z;
+    }
+
+    Vec3(double t)
+    {
+        this->x = t;
+        this->y = t;
+        this->z = t;
+    }
 
     //
     // Operator overloadings
@@ -49,6 +69,16 @@ public:
     double length2() const
     {
         return x * x + y * y + z * z;
+    }
+
+    inline static Vec3 random()
+    {
+        return Vec3(randomDouble(), randomDouble(), randomDouble());
+    }
+
+    inline static Vec3 random(double min, double max)
+    {
+        return Vec3(randomDouble(min, max), randomDouble(min, max), randomDouble(min, max));
     }
 
 public:
@@ -112,4 +142,15 @@ inline Vec3 cross(const Vec3 &u, const Vec3 &v)
 inline Vec3 normalized(Vec3 v)
 {
     return v / v.length();
+}
+
+Vec3 randomInUnitSphere()
+{
+    while (true)
+    {
+        Vec3 p = Vec3::random(-1.0, 1.0);
+        if (p.length2() >= 1)
+            continue;
+        return p;
+    }
 }

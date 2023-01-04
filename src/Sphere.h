@@ -12,7 +12,7 @@ public:
     //
     // Methods
     //
-    virtual bool hit(const Ray& ray, double tMin, double tMax, HitRecord& hitRec) const override
+    bool hit(const Ray& ray, double tMin, double tMax, HitRecord& hitRec) const override
     {
         Vec3 oc = ray.origin - center;
         double a = ray.direction.length2();
